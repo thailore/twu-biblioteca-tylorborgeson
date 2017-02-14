@@ -42,8 +42,7 @@ public class library {
     }
 
     public static void listBooks(){
-        System.out.println("\nAVAILABLE BOOKS");
-        System.out.println(String.format("%-20s %-20s %-4s", "Book Title", "Author", "Year\n"));
+        printTitleBar("AVAILABLE BOOKS", "Book Title", "Author", "Year");
         for (Book book : libraryList){
             if(book.getBookIsAvailable()) {
                 System.out.println(String.format("%-20s %-20s %-4s", book.getBookTitle(), book.getBookAuthor(), book.getBookYear()));
@@ -52,4 +51,10 @@ public class library {
         System.out.println();
     }
 
+    public static void printTitleBar(String title, String label1, String label2, String label3){
+
+        System.out.println("\n"+title);
+        System.out.println(String.format("%-20s %-20s %-4s", label1, label2, label3+"\n"));
+
+    }
 }
