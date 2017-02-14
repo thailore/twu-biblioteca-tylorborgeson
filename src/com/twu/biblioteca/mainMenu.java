@@ -11,6 +11,7 @@ public class mainMenu {
     };
 
     public void show(){
+        System.out.println("Welcome to the Bangalore Public Library Console!");
         System.out.println("LIBRARY MAIN MENU");
         boolean endSession = false;
         System.out.println("Available Actions:");
