@@ -9,6 +9,13 @@ public class Book {
     private int bookYear = 0;
     public boolean bookAvailable;
 
+    public Book(String title, String author, int year){
+        bookTitle = title;
+        bookAuthor = author;
+        bookYear = year;
+        bookAvailable = true;
+        library.libraryList.add(this);
+    }
 
     public Book(String title, String author, int year, boolean availability){
         bookTitle = title;
