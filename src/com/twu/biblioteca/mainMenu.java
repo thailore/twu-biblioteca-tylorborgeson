@@ -7,11 +7,16 @@ import java.util.Scanner;
  */
 public class mainMenu {
     public mainMenu(){
+        this.welcomeMessage();
         this.show();
     };
 
-    public void show(){
+    public void welcomeMessage(){
         System.out.println("Welcome to the Bangalore Public Library Console!");
+        return;
+        
+    }
+    public void show(){
         System.out.println("LIBRARY MAIN MENU");
         boolean endSession = false;
         System.out.println("Available Actions:");
