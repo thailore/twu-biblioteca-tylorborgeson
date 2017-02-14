@@ -2,23 +2,18 @@ package com.twu.biblioteca;
 
 import java.util.Scanner;
 
-/**
- * Created by tborgeso on 10/02/2017.
- */
 public class mainMenu {
     public mainMenu(){
         this.welcomeMessage();
         this.show();
-    };
-
-    public void welcomeMessage(){
-        System.out.println("Welcome to the Bangalore Public Library Console!");
-        return;
-        
     }
-    public void show(){
+
+    private void welcomeMessage(){
+        System.out.println("Welcome to the Bangalore Public Library Console!");
+    }
+
+    private void show(){
         System.out.println("LIBRARY MAIN MENU");
-        boolean endSession = false;
         System.out.println("Available Actions:");
         System.out.println("1: List Available Books");
         System.out.println("2: Checkout book");
@@ -28,12 +23,12 @@ public class mainMenu {
 
     }
 
-    public void route(){
+    private void route(){
         int action = getMainMenuUserInput("What would you like to do? Please enter action number:  ");
         this.executeAction(action);
     }
 
-    public int getMainMenuUserInput(String prompt){
+    private int getMainMenuUserInput(String prompt){
         Scanner reader = new Scanner(System.in);
         System.out.println(prompt);
         int userInput = reader.nextInt();
@@ -42,11 +37,10 @@ public class mainMenu {
     }
 
 
-    public void validateMainMenuUserInput(int userInput){
+    private void validateMainMenuUserInput(int userInput){
         if (userInput < 1 || userInput > 4){
             userInput = getMainMenuUserInput("\nPlease enter a valid action number: ");
         }
-        return;
     }
 
     private void executeAction(int action){

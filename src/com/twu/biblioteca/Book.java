@@ -1,8 +1,6 @@
 package com.twu.biblioteca;
 
-/**
- * Created by tborgeso on 10/02/2017.
- */
+
 public class Book {
     private String bookTitle = "";
     private String bookAuthor = "";

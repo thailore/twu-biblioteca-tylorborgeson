@@ -2,9 +2,6 @@ package com.twu.biblioteca;
 
 import java.util.ArrayList;
 
-/**
- * Created by tborgeso on 10/02/2017.
- */
 public class library {
     public static ArrayList<Book> libraryList = new ArrayList<Book>();
 
@@ -13,7 +10,7 @@ public class library {
         int bookIndex = findBookLocation(bookRequested);
         if (bookIndex > -1) {
             Book book = libraryList.get(bookIndex);
-            if (book.bookAvailable == true) {
+            if (book.bookAvailable) {
                 book.bookAvailable = false;
                 System.out.println("\nThank you, enjoy the book!\n");
                 return;
