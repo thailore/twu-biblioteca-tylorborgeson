@@ -9,6 +9,7 @@ import static org.junit.Assert.assertNotEquals;
 
 public class TestBibliotecaApp {
 
+    String formattedBookInfo = String.format("%-20s %-20s %-4s", "Book Title", "Author", "Year\n");
 
     @Test
     public void testCreateBook() {
@@ -78,8 +79,7 @@ public class TestBibliotecaApp {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         library.listBooks();
-        String formatted = String.format("%-20s %-20s %-4s", "Book Title", "Author", "Year\n");
-        String expectedOutput = "\nAVAILABLE BOOKS\n" + formatted + "\n\n";
+        String expectedOutput = "\nAVAILABLE BOOKS\n" + formattedBookInfo + "\n\n";
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -89,9 +89,8 @@ public class TestBibliotecaApp {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         Book testBook = new Book("TestBook", "TestAuthor", 0, false);
-        String formatted = String.format("%-20s %-20s %-4s", "Book Title", "Author", "Year\n");
         library.listBooks();
-        String expectedOutput = "\nAVAILABLE BOOKS\n" + formatted + "\n\n";
+        String expectedOutput = "\nAVAILABLE BOOKS\n" + formattedBookInfo + "\n\n";
         assertEquals(expectedOutput, outContent.toString());
         library.libraryList.remove(testBook);
     }

@@ -7,6 +7,7 @@ public class library {
 
 
     public static void checkoutBook(String bookRequested){
+
         int bookIndex = findBookLocation(bookRequested);
         if (bookIndex > -1) {
             Book book = libraryList.get(bookIndex);
@@ -20,6 +21,7 @@ public class library {
     }
 
     public static void returnBook(String bookRequested){
+
         int bookIndex = findBookLocation(bookRequested);
         if (bookIndex > -1) {
             Book book = libraryList.get(bookIndex);
@@ -42,7 +44,9 @@ public class library {
     }
 
     public static void listBooks(){
+
         printTitleBar("AVAILABLE BOOKS", "Book Title", "Author", "Year");
+
         for (Book book : libraryList){
             if(book.getBookIsAvailable()) {
                 System.out.println(String.format("%-20s %-20s %-4s", book.getBookTitle(), book.getBookAuthor(), book.getBookYear()));
@@ -50,6 +54,7 @@ public class library {
         }
         System.out.println();
     }
+
 
     public static void printTitleBar(String title, String label1, String label2, String label3){
 
