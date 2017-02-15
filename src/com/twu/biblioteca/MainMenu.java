@@ -32,15 +32,20 @@ public class MainMenu {
         Scanner reader = new Scanner(System.in);
         System.out.println(prompt);
         int userInput = reader.nextInt();
-        validateMainMenuUserInput(userInput);
+        boolean validInput = validMainMenuUserInput(userInput);
+        if (validInput) {
+            return userInput;
+        }
+        userInput = getMainMenuUserInput("\nPlease enter a valid action number: ");
         return userInput;
     }
 
 
-    private void validateMainMenuUserInput(int userInput){
+    private boolean validMainMenuUserInput(int userInput){
         if (userInput < 1 || userInput > 4){
-            userInput = getMainMenuUserInput("\nPlease enter a valid action number: ");
+            return false;
         }
+        return true;
     }
 
     private void executeAction(int action){
