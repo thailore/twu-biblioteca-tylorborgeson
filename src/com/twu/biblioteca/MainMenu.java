@@ -2,8 +2,8 @@ package com.twu.biblioteca;
 
 import java.util.Scanner;
 
-public class mainMenu {
-    public mainMenu(){
+public class MainMenu {
+    public MainMenu(){
         this.welcomeMessage();
         this.show();
     }
@@ -47,19 +47,19 @@ public class mainMenu {
         Scanner reader = new Scanner(System.in);
         switch(action){
             case 1: {
-                library.listBooks();
+                Library.listBooks();
                 this.show();
             }
             case 2: {
                 System.out.println("\nEnter the book title you want to checkout, careful of spelling: ");
                 String bookName = reader.nextLine();
-                library.checkoutBook(bookName);
+                Library.checkoutBook(bookName);
                 this.show();
             }
             case 3: {
                 System.out.println("\nEnter the book title you want to return, careful of spelling: ");
                 String bookName = reader.nextLine();
-                library.returnBook(bookName);
+                Library.returnBook(bookName);
                 this.show();
             }
             case 4: {

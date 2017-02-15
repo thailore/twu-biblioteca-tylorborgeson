@@ -12,7 +12,7 @@ public class Book {
         bookAuthor = author;
         bookYear = year;
         bookAvailable = true;
-        library.libraryList.add(this);
+        Library.bookCatalog.add(this);
     }
 
     public Book(String title, String author, int year, boolean availability){
@@ -20,7 +20,7 @@ public class Book {
         bookAuthor = author;
         bookYear = year;
         bookAvailable = availability;
-        library.libraryList.add(this);
+        Library.bookCatalog.add(this);
     }
 
     public String getBookTitle(){
