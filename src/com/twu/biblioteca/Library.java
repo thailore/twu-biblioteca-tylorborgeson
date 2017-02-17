@@ -5,6 +5,8 @@ import java.util.*;
 public class Library {
     public final static HashMap<Book, Boolean> bookCatalogAndAvailability = new HashMap<Book, Boolean>();
 
+    public Library(){}
+
 
     public static void addNewBook(Book book){
         Library.bookCatalogAndAvailability.put(book, true);

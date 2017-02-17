@@ -44,6 +44,24 @@ public class TestBibliotecaApp {
         assertEquals(Library.bookCatalogAndAvailability.get(testBook), true);
         Library.bookCatalogAndAvailability.remove(testBook);
     }
+
+    @Test
+    public void testFindBookSuccessful() {
+
+        Book testBook = new Book("TestTitle3", "Author", 0);
+        Library.addNewBook(testBook);
+        Book bookLocation = Library.findBookByTitle("TestTitle3");
+        assertEquals(bookLocation, testBook);
+        Library.bookCatalogAndAvailability.remove(testBook);
+    }
+
+    @Test
+    public void testFindBookUnsuccessful() {
+
+        Book bookLocation = Library.findBookByTitle("TestTitle100");
+        assertEquals(bookLocation, null);
+    }
+
     /*
     @Test
     public void testUnsuccessfulCheckoutBook() {
@@ -53,25 +71,6 @@ public class TestBibliotecaApp {
         Library.checkoutBook("A Fake Book");
         String expectedOutput = "That book is not available\n";
         assertEquals(expectedOutput, outContent.toString());
-    }
-
-
-
-
-    @Test
-    public void testFindBookSuccessful() {
-
-        Book testBook = new Book("TestTitle3", "Author", 0, true);
-        int bookLocation = Library.findBookLocation("TestTitle3");
-        assertNotEquals(bookLocation, -1);
-        Library.bookCatalog.remove(testBook);
-    }
-
-    @Test
-    public void testFindBookUnsuccessful() {
-
-        int bookLocation = Library.findBookLocation("TestTitle100");
-        assertEquals(bookLocation, -1);
     }
 
 
