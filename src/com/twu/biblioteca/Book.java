@@ -2,8 +2,8 @@ package com.twu.biblioteca;
 
 
 public class Book extends LibraryItem{
-    public String author;
-    public int year;
+    private String author;
+    private int year;
 
 
     public Book(String bookTitle, String author, int year){

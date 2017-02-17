@@ -1,9 +1,21 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainMenu {
-    public MainMenu(){
+    public static Library library1;
+
+    public static final ArrayList<Integer> userOptions = new ArrayList<Integer>(){{
+        add (1);
+        add (2);
+        add (3);
+        add (4);
+    }};
+
+
+    public MainMenu(Library bookLibrary){
+        library1 = bookLibrary;
         this.welcomeMessage();
         this.show();
     }
@@ -42,7 +54,7 @@ public class MainMenu {
 
 
     private boolean validMainMenuUserInput(int userInput){
-        if (userInput < 1 || userInput > 4){
+        if (!userOptions.contains(userInput)){
             return false;
         }
         return true;
@@ -52,19 +64,19 @@ public class MainMenu {
         Scanner reader = new Scanner(System.in);
         switch(action){
             case 1: {
-                Library.listBooks();
+                new DisplayInformation(Library.bookCatalogAndAvailability);
                 this.show();
             }
             case 2: {
                 System.out.println("\nEnter the book title you want to checkout, careful of spelling: ");
                 String bookName = reader.nextLine();
-                Library.checkoutBook(bookName);
+                library1.checkoutBook(bookName);
                 this.show();
             }
             case 3: {
                 System.out.println("\nEnter the book title you want to return, careful of spelling: ");
                 String bookName = reader.nextLine();
-                Library.returnBook(bookName);
+                library1.returnBook(bookName);
                 this.show();
             }
             case 4: {
