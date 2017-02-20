@@ -34,7 +34,7 @@ public class BibliotecaApp {
     private static ArrayList<User> initUsers(){
         ArrayList<User> users = new ArrayList<User>();
         users.add(new User("111-2222", "qwerty", "First User", "firstuser@email.com", "1234567"));
-
+        users.add(new User("222-3333", "abcde", "Second User", "seconduser@email.com", "1234566"));
         return users;
     }
 

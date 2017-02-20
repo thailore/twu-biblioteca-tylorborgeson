@@ -7,12 +7,14 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class TestBibliotecaApp {
     public ArrayList<Book> testBookCatalog = new ArrayList<Book>();
     Library testLibrary = new Library(testBookCatalog);
-    String formattedBookInfo = String.format("%-20s %-20s %4s %-4s", "Title", "Author", "Year", "\n");
-    String formattedMovieInfo = String.format("%-20s %-20s %4s %-4s", "Title", "Director", "Year", "Rating\n");
+    String formattedBookInfo = String.format("%-20s %-20s %-10s %-10s", "Title", "Author", "Year", "\n");
+    String formattedMovieInfo = String.format("%-20s %-20s %-10s %-10s", "Title", "Director", "Year", "Rating\n");
+    public User fakeUser = new User("111-1111", "fakePass", "buddy", "asdf@asdf.com", "123");
 
     @Test
     public void testCreateBook() {
@@ -34,7 +36,7 @@ public class TestBibliotecaApp {
     public void testSuccessfulCheckoutBook() {
         Book testBook = new Book("TestTitle1", "TestAuthor", 0);
         testLibrary.addNewBook(testBook);
-        testLibrary.checkoutBook("TestTitle1");
+        testLibrary.checkoutBook("TestTitle1", fakeUser);
         assertEquals(testLibrary.bookCatalogAndAvailability.get(testBook), false);
         testLibrary.bookCatalogAndAvailability.remove(testBook);
     }
@@ -44,7 +46,7 @@ public class TestBibliotecaApp {
 
         Book testBook = new Book("TestTitle2", "TestAuthor", 0);
         testLibrary.addNewBook(testBook);
-        testLibrary.returnBook("TestTitle2");
+        testLibrary.returnBook("TestTitle2", fakeUser);
         assertEquals(testLibrary.bookCatalogAndAvailability.get(testBook), true);
         testLibrary.bookCatalogAndAvailability.remove(testBook);
     }
@@ -70,8 +72,8 @@ public class TestBibliotecaApp {
     public void testListBooks() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        new DisplayInformation(testLibrary.bookCatalogAndAvailability, null);
-        String expectedOutput = "\nAVAILABLE BOOKS\n" + formattedBookInfo + "\n\n";
+        new DisplayInformation(testLibrary.bookCatalogAndAvailability, null, null, null);
+        String expectedOutput = "\nBOOKS\n" + formattedBookInfo + "\n\n";
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -82,8 +84,8 @@ public class TestBibliotecaApp {
         System.setOut(new PrintStream(outContent));
         Book testBook = new Book("TestBook", "TestAuthor", 0);
         testLibrary.addNewUnavailableBook(testBook);
-        new DisplayInformation(testLibrary.bookCatalogAndAvailability, null);
-        String expectedOutput = "\nAVAILABLE BOOKS\n" + formattedBookInfo + "\n\n";
+        new DisplayInformation(testLibrary.bookCatalogAndAvailability, null, null, null);
+        String expectedOutput = "\nBOOKS\n" + formattedBookInfo + "\n\n";
         assertEquals(expectedOutput, outContent.toString());
         testLibrary.bookCatalogAndAvailability.remove(testBook);
     }
@@ -94,7 +96,7 @@ public class TestBibliotecaApp {
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        testLibrary.checkoutBook("A Fake Book");
+        testLibrary.checkoutBook("A Fake Book", fakeUser);
         String expectedOutput = "\nThat book is not available\n\n";
         assertEquals(expectedOutput, outContent.toString());
     }
@@ -105,7 +107,7 @@ public class TestBibliotecaApp {
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        testLibrary.returnBook("Another Fake Book");
+        testLibrary.returnBook("Another Fake Book", fakeUser);
         String expectedOutput = "\nThat is not a valid book return\n\n";
         assertEquals(expectedOutput, outContent.toString());
     }
@@ -122,8 +124,8 @@ public class TestBibliotecaApp {
     public void testListMovies(){
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        new DisplayInformation( null, testLibrary.movieCatalogAndAvailability);
-        String expectedOutput = "\nAVAILABLE MOVIES\n" + formattedMovieInfo + "\n\n";
+        new DisplayInformation( null, testLibrary.movieCatalogAndAvailability, null, null);
+        String expectedOutput = "\nMOVIES\n" + formattedMovieInfo + "\n\n";
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -131,11 +133,28 @@ public class TestBibliotecaApp {
     public void testSuccessfulCheckoutMovie() {
         Movie testMovie = new Movie("TestTitle1", "TestDirector", 0, 0);
         testLibrary.addNewMovie(testMovie);
-        testLibrary.checkoutMovie("TestTitle1");
+        testLibrary.checkoutMovie("TestTitle1", fakeUser);
         assertEquals(testLibrary.movieCatalogAndAvailability.get(testMovie), false);
         testLibrary.movieCatalogAndAvailability.remove(testMovie);
     }
 
+    @Test
+    public void testGetUserByNumber(){
+        testLibrary.addNewUser(fakeUser);
+        // Successful get user
+        User testUser = testLibrary.getUserByNumber(fakeUser.getLibraryNumber());
+        assertNotEquals(testUser, null);
+
+        // Unsuccessful get user
+        User testUser2 = testLibrary.getUserByNumber("000-0000");
+        assertEquals(testUser2, null);
+    }
+
+    @Test
+    public void testPasswordConfirmed(){
+        boolean correct = testLibrary.confirmUserPassword(fakeUser, "fakePass");
+        assertEquals(correct, true);
+    }
 
 }
 
