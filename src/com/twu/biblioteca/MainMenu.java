@@ -11,11 +11,12 @@ public class MainMenu {
         add (2);
         add (3);
         add (4);
+        add (5);
     }};
 
 
-    public MainMenu(Library bookLibrary){
-        library1 = bookLibrary;
+    public MainMenu(Library library){
+        library1 = library;
         this.welcomeMessage();
         this.show();
     }
@@ -28,9 +29,10 @@ public class MainMenu {
         System.out.println("LIBRARY MAIN MENU");
         System.out.println("Available Actions:");
         System.out.println("1: List Available Books");
-        System.out.println("2: Checkout book");
-        System.out.println("3: Return book");
-        System.out.println("4: Quit");
+        System.out.println("2: List Available Movies");
+        System.out.println("3: Checkout book");
+        System.out.println("4: Return book");
+        System.out.println("5: Quit");
         route();
 
     }
@@ -64,22 +66,26 @@ public class MainMenu {
         Scanner reader = new Scanner(System.in);
         switch(action){
             case 1: {
-                new DisplayInformation(Library.bookCatalogAndAvailability);
+                new DisplayInformation(library1.bookCatalogAndAvailability, null);
                 this.show();
             }
             case 2: {
+                new DisplayInformation(null, library1.movieCatalogAndAvailability);
+                this.show();
+            }
+            case 3: {
                 System.out.println("\nEnter the book title you want to checkout, careful of spelling: ");
                 String bookName = reader.nextLine();
                 library1.checkoutBook(bookName);
                 this.show();
             }
-            case 3: {
+            case 4: {
                 System.out.println("\nEnter the book title you want to return, careful of spelling: ");
                 String bookName = reader.nextLine();
                 library1.returnBook(bookName);
                 this.show();
             }
-            case 4: {
+            case 5: {
                 System.out.println("\nThank you, come back soon!");
                 System.exit(0);
             }
